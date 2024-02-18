@@ -1,0 +1,17 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/translation_form.css' %}">
+<div id="translation-container">
+    <div id="translation-box">
+        <div id="translation-input-box">
+            <!-- <p id="translation-input"></p> -->
+            <textarea name="translation-input" id="translation-input" cols="30" rows="10"></textarea>
+        </div>
+        <div id="translation-output-box">
+            <!-- <p id="translation-output"></p> -->
+            <textarea name="translation-output" id="translation-output" cols="30" rows="10"></textarea>
+        </div>
+    </div>
+    <div id="translation-button-box">
+        <input id="translate-button" type="button" value="Translate">
+    </div>
+</div>
