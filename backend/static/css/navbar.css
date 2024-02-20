@@ -4,9 +4,9 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    background-color: blueviolet;
-    color: whitesmoke;
-    box-shadow: 0px 3px 6px 1px rgb(65, 9, 118);
+    background-color: rgb(231, 231, 231);
+    color: rgb(71, 71, 71);
+    box-shadow: 0px 3px 3px 1px rgb(104, 104, 104);
 }
 #nav > #nav-left,
 #nav > #nav-right {
@@ -25,18 +25,18 @@
 #nav-left > li > a,
 #nav-right > li > a {
     text-decoration: none;
-    border: 1px solid blueviolet;
+    border: 1px solid rgb(231, 231, 231);
     display: inline-block;
     padding: 8px 20px;
     background-color: inherit;
     color: inherit;
-    transition: .3s;
+    transition: .5s;
     text-align: center;
 }
 #nav-left > li > a:hover,
 #nav-right > li > a:hover {
-    border-color: white;
-    background-color: rgb(117, 18, 209);
+    border-color: rgb(141, 141, 141);
+    background-color: rgb(199, 199, 199);
 } 
 
 #site {

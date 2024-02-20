@@ -8,12 +8,32 @@ textarea {
     justify-content: center;
     flex-flow: column;
     align-items: center;
+    border-radius: 12px;
 }
+
+#translation-container > #translation-heading {
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: -webkit-linear-gradient(#00a6ff, #858585);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+#translation-container > #translation-box,
+#translation-container > #translation-box > #translation-input-box,
+#translation-container > #translation-box > #translation-output-box {
+    border-radius: inherit;
+}
+
 #translation-box {
     width: 80%;
     height: 60%;
-    background-color: rgb(238, 220, 255);
-    box-shadow: 0px 0px 6px 1px rgb(238, 220, 255);
+    /* background-color: rgb(238, 238, 238); */
+    /* background-image: linear-gradient(to right, #ffffff, #abe7ff); */
+    background-image: linear-gradient(to right, rgb(199, 221, 241) 0%, rgb(185, 185, 185) 50%,  rgb(175, 190, 204));
+    box-shadow: 0px 0px 6px 1px rgb(160, 160, 160);
     display: flex;
     justify-content: center;
     /* flex-flow: column; */
@@ -22,20 +42,46 @@ textarea {
 
 
 #translation-input-box,
-#translation-output-box {
-    width: 50%;
+#translation-output-box,
+#translation-direction-box {
     height: 100%;
     display: flex;
     justify-content: center;
     flex-flow: column;
     align-items: center;
 }
+
+
+#translation-input-box,
+#translation-output-box {
+    width: 45%;
+}
+
+
+#translation-direction-box {
+    width: 10%;
+}
+#translation-direction-box > img {
+    width: 60px;
+    height: 60px;
+}
+
+
+
 #translation-input,
 #translation-output {
-    width: 90%;
-    height: 90%;
-    background-color: rgb(251, 246, 255);
+    width: 80%;
+    height: 80%;
+    /* background-color: rgb(251, 246, 255); */
     margin: 10px;
+    border: none;
+    outline: none;
+    color: rgb(82, 82, 82);
+    background-color: white;
+    border-radius: inherit;
+    padding: 20px;
+    font-size: large;
+    font-weight: bold;
 }
 
 #translation-button-box {
@@ -44,17 +90,26 @@ textarea {
     justify-content: center;
 }
 #translate-button {
-    border: 1px solid blueviolet;
-    box-shadow: 0px 0px 3px 1px rgb(140, 17, 255);
+    border: 1px solid rgb(231, 231, 231);
+    box-shadow: 0px 0px 3px 1px rgba(21, 95, 168, 0.966);
     border-radius: 12px;
+    outline: none;
     font-size: large;
     font-weight: bold;
     padding: 10px 20px;
     background-color: white;
-    color: blueviolet;
+    color: rgba(0, 119, 255, 0.966);
+    transition: .4s;
 }
 #translate-button:hover {
-    background-color: blueviolet;
+    background-color: rgba(0, 119, 255, 0.966);
     color: white;
     cursor: pointer;
 }
+
+
+/* #translation-input-box > textarea:focus,
+#translation-output-box > textarea:focus {
+    border: none;
+    outline: none;
+} */
