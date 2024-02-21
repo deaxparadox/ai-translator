@@ -1,7 +1,13 @@
 import json
 
 from channels.generic.websocket import AsyncWebsocketConsumer
-from channels.consumer import AsyncConsumer
+from channels.consumer import AsyncConsumer, SyncConsumer
+from channels.exceptions import StopConsumer
+
+
+from app.models import History
+
+from translate.load import transcriber
 
 class EchoConsumer(AsyncConsumer):
     async def websocket_connect(self, event):
@@ -12,6 +18,7 @@ class EchoConsumer(AsyncConsumer):
     async def websocket_receive(self, event):
         print("Recevied!")
         message = event["text"]
+        message = transcriber(message)[0]["translation_text"]
         await self.send({
             "type": "websocket.send",
             "text": message,
@@ -19,12 +26,18 @@ class EchoConsumer(AsyncConsumer):
         print("Replied")
         
     async def websocket_disconnect(self, event):
-        # super().disconnect(event)
         print('Disconnected', event)
         await self.send({
             "type": "websocket.disconnect",
         })
+        await self.disconnect(event["code"])
+        raise StopConsumer()
         
+    async def disconnect(self, code):
+        """
+        Called when a WebSocket connection is closed.
+        """
+        pass
         
         
 
@@ -58,3 +71,5 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         # Send message to WebSocket
         await self.send(text_data=json.dumps({"message": message}))
+        
+        
