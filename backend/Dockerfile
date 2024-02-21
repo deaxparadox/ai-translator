@@ -16,4 +16,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 
-# ENTRYPOINT [ "sh", "run.sh" ]
+ENTRYPOINT [ "sh", "run.sh" ]

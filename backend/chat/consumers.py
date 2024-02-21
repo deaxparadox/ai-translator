@@ -19,7 +19,11 @@ class EchoConsumer(AsyncConsumer):
         print("Replied")
         
     async def websocket_disconnect(self, event):
+        # super().disconnect(event)
         print('Disconnected', event)
+        await self.send({
+            "type": "websocket.disconnect",
+        })
         
         
         
