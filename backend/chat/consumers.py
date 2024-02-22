@@ -3,11 +3,12 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.consumer import AsyncConsumer, SyncConsumer
 from channels.exceptions import StopConsumer
-
+from django.conf import settings
 
 from app.models import History
 
-from translate.load import transcriber
+
+from manage import transcriber
 
 class EchoConsumer(AsyncConsumer):
     async def websocket_connect(self, event):

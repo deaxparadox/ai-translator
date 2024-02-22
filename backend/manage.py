@@ -4,9 +4,21 @@ import os
 import sys
 
 
+
+# try:
+#     print("\n\rImporting transcriber")
+#     from npl.load import transcriber
+#     print("\ttranscriber imported\n")
+# except Exception as e:
+#     raise RuntimeError(f"{e}")
+
+
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
+
+
+
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

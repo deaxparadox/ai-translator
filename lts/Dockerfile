@@ -1,4 +1,5 @@
-FROM python:3.12.0-alpine
+FROM python:3.12.0-bullseye
+
 
 # set work directory
 WORKDIR /usr/src/app
@@ -6,6 +7,8 @@ WORKDIR /usr/src/app
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+
+RUN apt-get update && apt-get install build-essential g++ cmake -y
 
 # install dependencies
 RUN pip install --upgrade pip

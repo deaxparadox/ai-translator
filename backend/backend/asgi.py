@@ -22,6 +22,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
 
 from chat.routing import websocket_urlpatterns
 
+
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),
     "websocket": AllowedHostsOriginValidator(

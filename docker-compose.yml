@@ -1,13 +1,22 @@
 version : "3.8"
 
 services:
-  web:
-    build: ./backend/
-    # command: python manage.py runserver 0.0.0.0:8000
-    # entrypoint: [run.sh]
+  # web:
+  #   build: ./backend/
+  #   # command: python manage.py runserver 0.0.0.0:8000
+  #   # entrypoint: [run.sh]
+  #   volumes:
+  #     - ./backend/:/usr/src/app/
+  #   ports:
+  #     - 8000:8000
+  #   container_name: lts-backend-server
+  npl:
+    build:
+      context: ./lts
+      dockerfile: Dockerfile
     volumes:
-      - ./backend/:/usr/src/app/
+      - ./lts:/usr/src/app/
     ports:
-      - 8000:8000
-    container_name: lts-backend-server
-    
+      - 9000:8000
+    container_name: lts-api-server
+      

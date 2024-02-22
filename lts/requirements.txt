@@ -1,1 +1,8 @@
-fastapi==0.109.2
+# fastapi[all]
+# torch==2.2.1
+# transformers==4.38.1
+
+fastapi[all]
+transformers[torch]
+sentencepiece
+sacremoses
