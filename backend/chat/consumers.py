@@ -8,7 +8,6 @@ from django.conf import settings
 from app.models import History
 
 
-from manage import transcriber
 
 class EchoConsumer(AsyncConsumer):
     async def websocket_connect(self, event):
@@ -19,7 +18,7 @@ class EchoConsumer(AsyncConsumer):
     async def websocket_receive(self, event):
         print("Recevied!")
         message = event["text"]
-        message = transcriber(message)[0]["translation_text"]
+        # message = transcriber(message)[0]["translation_text"]
         await self.send({
             "type": "websocket.send",
             "text": message,

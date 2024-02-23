@@ -3,7 +3,8 @@ console.log("Translation-form");
 
 class WS  {
     constructor() {
-        this.ws = new WebSocket(`ws:${window.location.host}/ws/translate/`);
+        // this.ws = new WebSocket(`ws:${window.location.host}/ws/translate/`);
+        this.ws = new WebSocket(`ws://localhost:9000/ws/translate`);
         this.onmessage();
         this.message = null;
         this.recevied = false;
@@ -19,7 +20,8 @@ class WS  {
 
     async onmessage(callback) {
         this.ws.onmessage = async (event) => {
-           document.querySelector(translationOuput).value = JSON.parse(event.data);
+            // document.querySelector(translationOuput).value = JSON.parse(event.data);
+               document.querySelector(translationOuput).value = JSON.parse(event.data);
         }
     }
     async close() {

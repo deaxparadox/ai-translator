@@ -3,7 +3,10 @@
 <div id="nav">
     <ul id="nav-left">
         <li id="site" class="nav-item">
-            <a href="/">LTS</a>
+            <a href="{% url "app:dashboard" %}">LTS</a>
+        </li>
+        <li class="nav-item other">
+            <a href="{% url "app:translate" %}">Translate</a>
         </li>
         <li class="nav-item other">
             <a href="{% url "app:team" %}"><img src='{% static "images/microsoft-teams.svg" %}' alt=""></a>
@@ -18,7 +21,7 @@
                 <a href="#">Sign Out</a></li>
         {% else %}
             <li class="nav-item other">
-                <a href="#">Sign In</a> | <a href="">Register</a>
+                <a href="#">Sign In</a> | <a href="#">Register</a>
             </li>
         {% endif %}
     </ul>

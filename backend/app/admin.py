@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from app.models import LTSAPIToken
+
+@admin.register(LTSAPIToken)
+class LTSAdminMode(admin.ModelAdmin):
+    pass

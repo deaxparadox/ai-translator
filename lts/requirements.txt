@@ -3,6 +3,7 @@
 # transformers==4.38.1
 
 fastapi[all]
+sqlalchemy==2.0.27
 transformers[torch]
 sentencepiece
 sacremoses
