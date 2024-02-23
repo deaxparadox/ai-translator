@@ -2,7 +2,7 @@ from sqlalchemy import String, Column
 from sqlalchemy.orm import relationship
 import datetime
 
-from backend.database import Base
+from app.database import Base
 
 # i = 0
 
@@ -25,4 +25,9 @@ class History(Base):
 
     id = Column(String, default=generate_history_id, primary_key=True, unique=True)
     english = Column(String)
-    hindi = Column(String, primary=True)
+    hindi = Column(String)
+
+    def __str__(self) -> str:
+        return f"{self.english} {self.hindi}"
+    
+
