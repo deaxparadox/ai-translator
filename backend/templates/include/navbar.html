@@ -21,7 +21,7 @@
                 <a href="#">Sign Out</a></li>
         {% else %}
             <li class="nav-item other">
-                <a href="#">Sign In</a> | <a href="#">Register</a>
+                <a href="{% url "app:signin" %}">Sign In</a> | <a href="#">Register</a>
             </li>
         {% endif %}
     </ul>

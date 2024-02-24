@@ -1,7 +1,8 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, status, Form
 from fastapi.responses import Response, JSONResponse
 from fastapi.requests import Request
 from sqlalchemy.orm import Session
+from typing import Annotated
 
 from app.database import get_db
 from . import crud, models, schema
@@ -30,6 +31,7 @@ def get_all_history(resposne: Response, db: Session = Depends(get_db)):
 def create_history(
     response: Response,
     english: schema.EnglishSchema | None = None,
+    # english: Annotated[str, Form()],
     db: Session = Depends(get_db), 
 ):
     print(english)

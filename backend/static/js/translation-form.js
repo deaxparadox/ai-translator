@@ -1,50 +1,74 @@
 console.log("Translation-form");
 
 
-class WS  {
-    constructor() {
-        // this.ws = new WebSocket(`ws:${window.location.host}/ws/translate/`);
-        this.ws = new WebSocket(`ws://localhost:9000/ws/translate`);
-        this.onmessage();
-        this.message = null;
-        this.recevied = false;
-        this.interval = undefined;
-        // this.onclose();
-    }
+// class WS  {
+//     constructor() {
+//         // this.ws = new WebSocket(`ws:${window.location.host}/ws/translate/`);
+//         this.ws = new WebSocket(`ws://localhost:9000/ws/translate`);
+//         this.onmessage();
+//         this.message = null;
+//         this.recevied = false;
+//         this.interval = undefined;
+//         // this.onclose();
+//     }
 
 
-    async send(data) {
-        const stringifiedData = JSON.stringify(data);
-        this.ws.send(stringifiedData)
-    }
+//     async send(data) {
+//         const stringifiedData = JSON.stringify(data);
+//         this.ws.send(stringifiedData)
+//     }
 
-    async onmessage(callback) {
-        this.ws.onmessage = async (event) => {
-            // document.querySelector(translationOuput).value = JSON.parse(event.data);
-               document.querySelector(translationOuput).value = JSON.parse(event.data);
-        }
-    }
-    async close() {
-        this.ws.onclose = () => {
-            console.log("ws Connection clonsed");
-        }
-    }
+//     async onmessage(callback) {
+//         this.ws.onmessage = async (event) => {
+//             // document.querySelector(translationOuput).value = JSON.parse(event.data);
+//                document.querySelector(translationOuput).value = JSON.parse(event.data);
+//         }
+//     }
+//     async close() {
+//         this.ws.onclose = () => {
+//             console.log("ws Connection clonsed");
+//         }
+//     }
 
-    async getMessage() {
-        if (this.recevied) {
-            // reset `this.recevied` and `this.message`
-            this.recevied = false;
-            retMes = this.message;
-            this.message = null
-            return retMes;
-        }
-        return null;
-    }
+//     async getMessage() {
+//         if (this.recevied) {
+//             // reset `this.recevied` and `this.message`
+//             this.recevied = false;
+//             retMes = this.message;
+//             this.message = null
+//             return retMes;
+//         }
+//         return null;
+//     }
+// }
+
+// // websocket instance
+// const ws = new WS();
+
+
+const URL = 'http://localhost:9000/history/create'
+
+const translate = async (data) => {
+    const body = JSON.stringify({english: data})
+    console.log(body, body.length)
+    fetch(URL, {
+        "method": 'POST',
+        "headers": {
+            'Accept': '*/*',
+            'Content-Type': 'application/json',
+        },
+        "dataType": 'json',
+        "body": body,
+    })
+    .then(async (e) => {
+        let data = await e.json()
+        // console.log(data, typeof data)
+        document.querySelector(translationOuput).value = data.hindi
+    })
+    .catch(async (e) => {
+        console.log(e)
+    })
 }
-
-// websocket instance
-const ws = new WS();
-
 
 
 const translationInput = "#translation-input";
@@ -59,28 +83,30 @@ const translationButton = "#translate-button";
  */
 const translateOnTranslationButton = async function () {
     let interval = undefined;
-    document.querySelector(translationButton).onclick = async  () => {
+    document.querySelector(translationButton).onclick = async () => {
         const data = document.querySelector(translationInput).value;
         if (data) {
-            ws.send(data);
+            // ws.send(data);
+            await translate(data)
         } else {
             alert("No data!");
         }
-        
+
     }
 }
 
 
-const  translateOnEnter = async function() {
-    document.querySelector(translationInput).addEventListener("keydown", async function(event) {
+const translateOnEnter = async function () {
+    document.querySelector(translationInput).addEventListener("keydown", async function (event) {
         if ((event.ctrlKey === true) && (event.key === "Enter")) {
             const data = document.querySelector(translationInput).value;
             if (data) {
-                ws.send(data);
+                // ws.send(data);
+                await translate(data)
             } else {
                 alert("No data!");
             }
-            
+
         }
     })
 }

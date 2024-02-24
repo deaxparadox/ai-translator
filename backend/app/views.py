@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.http.response import JsonResponse
 from django.contrib.auth.models import User
 
+from app.forms import UserForm
 from app.models import LTSAPIToken
 
 def dashboard_view(request):
@@ -35,3 +36,9 @@ def get_api_token_view(request):
     return JsonResponse({
         "message": "User not authenticated."
     })
+    
+def signin_view(request):
+    # if request.method == "POST":
+        
+    form = UserForm()
+    return render(request, "signin.html", {"form": form})
