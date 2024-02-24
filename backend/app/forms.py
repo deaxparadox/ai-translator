@@ -1,5 +1,6 @@
 from typing import Any
 from django.contrib.auth.models import User
+from django.db import IntegrityError
 from django import forms
 from uuid import uuid4
 
@@ -56,11 +57,19 @@ class UserRegisterForm(forms.Form):
         return True
 
     def save(self, *args, **kwargs) -> Any:
-        user = User.objects.create(self.cleaned_data['username'], self.cleaned_data['password'])
         token: str | None = None
         while True:
             token = str(uuid4())
             if self._check_duplicate(token):
                 break
-        instance = LTSAPIToken.objects.create(user, token)
+        try:
+            user = User.objects.create(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
+        except User.MultipleObjectsReturned as e:
+            print(e)
+            return None
+        except IntegrityError as e:
+            print(e)
+            return None
+
+        instance = LTSAPIToken.objects.create(user=user, token=token)
         return instance

@@ -11,6 +11,7 @@ from app.database import engine, SessionLocal, get_db
 
 from app.history import schema, models
 from app.history.app import router as history_router
+from app.user.app import router as user_router
 
 # models.Base.metadata.create_all(bind=engine)
 
@@ -20,6 +21,11 @@ app.include_router(
     history_router,
     prefix="/history",
     tags=['history'],
+)
+app.include_router(
+    user_router,
+    prefix="/user",
+    tags=['user'],
 )
 
 # Dependency
