@@ -18,10 +18,10 @@
     <ul id="nav-right">
         {% if user.is_authenticated %}
             <li class="nav-item other">
-                <a href="#">Sign Out</a></li>
+                <a href="{% url "app:signout" %}">Sign Out</a></li>
         {% else %}
             <li class="nav-item other">
-                <a href="{% url "app:signin" %}">Sign In</a> | <a href="#">Register</a>
+                <a href="{% url "app:signin" %}">Sign In</a> | <a href="{% url "app:register" %}">Register</a>
             </li>
         {% endif %}
     </ul>

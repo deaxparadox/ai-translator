@@ -1,0 +1,13 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<link rel="stylesheet" href="{% static 'css/signin.css' %}">
+<div id="signin-container">
+    <div id="form">
+        <form class="my-class" method="POST" action="{% url 'app:register' %}">
+            {% csrf_token %}
+            {{ form|crispy }}    
+            <input type="submit" value="Sign in">
+        </form>
+    </div>
+</div>

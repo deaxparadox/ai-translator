@@ -14,7 +14,7 @@ class LTSAPIToken(models.Model):
     
     # create uuid4 string
     # and assign it to token
-    token = models.CharField(max_length=36)
+    token = models.CharField(max_length=36, unique=True)
 
     def __str__(self) -> str:
         return self.user.username
