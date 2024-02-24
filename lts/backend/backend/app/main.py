@@ -7,22 +7,28 @@ from sqlalchemy.orm import Session
 import app.settings.local as settings
 from app.schema import HelloModel
 from app.ws import manager
-from app.database import engine, SessionLocal
+from app.database import engine, SessionLocal, get_db
 
-from app.history import schema
-from app.history import models
+from app.history import schema, models
+from app.history.app import router as history_router
 
 # models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+app.include_router(
+    history_router,
+    prefix="/history",
+    tags=['history'],
+)
+
 # Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# def get_db():
+#     db = SessionLocal()
+#     try:
+#         yield db
+#     finally:
+#         db.close()
 
 
 
@@ -50,12 +56,12 @@ async def read_root(db: Session = Depends(get_db)):
     return {"message": "Hello Everyone"}
 
 
-@app.get("/history", response_model=schema.Histories)
-async def read_root(db: Session = Depends(get_db)):
-    histories = db.query(models.History).filter(models.History.id=="2024-02-23T13:50:02.711114")
-    return {
-        'histories': histories
-    }
+# @app.get("/history", response_model=schema.Histories)
+# async def read_root(db: Session = Depends(get_db)):
+#     histories = db.query(models.History).filter(models.History.id=="2024-02-23T13:50:02.711114")
+#     return {
+#         'histories': histories
+#     }
 
 @app.get("/items/{item_id}")
 async def read_item(item_id: int, q: Union[str, None] = None):
