@@ -9,6 +9,8 @@ from django.http import (
     JsonResponse
 )
 from django.contrib import messages
+import requests
+import json
 
 from app.forms import UserRegisterForm, UserSignInForm
 from app import models
@@ -32,6 +34,10 @@ def signin_view(request) -> (HttpResponse | HttpResponseRedirect | HttpResponseP
             )
             if user is not None:
                 login(request, user)
+                messages.add_message(
+                    request, messages.INFO,
+                    "User successfully logged in."
+                )
                 return redirect(reverse("app:translate"))
             else: 
                 messages.add_message(request, messages.INFO, "Invalid User")
@@ -44,6 +50,7 @@ def signin_view(request) -> (HttpResponse | HttpResponseRedirect | HttpResponseP
 
 def signout_view(request):
     logout(request)
+    messages.add_message(request, messages.INFO, "User successfully logged out.")
     return redirect(reverse("app:signin"))
 
 
@@ -55,13 +62,39 @@ def create_register_form(request) -> HttpResponse:
     form = UserRegisterForm()
     return render(request, "register.html", {"form": form})
 
+def register_create_token(request, token: str) -> bool:
+    data = json.dumps({"token": token})
+    print("\tSending requests for creating token")
+    res = None
+    try:
+        res = requests.post("http://localhost:9000/user/create", data=data)
+    except:
+        messages.add_message(request, messages.INFO, "Unable to connect to register token")
+        return False
+    match res.status_code:
+        case 201:
+            print("\tToken created successfull")
+            messages.add_message(request, messages.INFO, "Token created successfully :)")
+            return True
+        case 409:
+            print("Unable to create token")
+            messages.add_message(request, messages.INFO, f"Unable to create token :( {res.text}")
+            return False
+        case _:
+            print("Unable to create token")
+            messages.add_message(request, messages.INFO, f"Unable to create token :( {res.text}")
+            return False
 
 def register_view(request) -> (HttpResponse | HttpResponseRedirect | HttpResponsePermanentRedirect):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect(reverse("app:signin"))
+            token_object = form.save()
+            if register_create_token(request, token_object.token):
+                return redirect(reverse("app:signin"))
+            else:
+                token_object.delete()
+                return create_register_form(request)
         else:
             print("Invalid register form")
             return create_register_form(request)

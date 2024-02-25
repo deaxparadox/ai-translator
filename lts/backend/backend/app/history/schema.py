@@ -15,3 +15,7 @@ class HistoryWithID(HistorySchema):
 
 class Histories(BaseModel):
     histories: list[HistoryWithID]
+
+class EnglishTokenSchema(EnglishSchema):
+    token: str
+    

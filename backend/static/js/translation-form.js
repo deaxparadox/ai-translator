@@ -1,5 +1,9 @@
 console.log("Translation-form");
 
+const getToken = async function () {
+    return document.querySelector("#translate_hidden_token").value
+}
+
 
 // class WS  {
 //     constructor() {
@@ -48,8 +52,8 @@ console.log("Translation-form");
 
 const URL = 'http://localhost:9000/history/create'
 
-const translate = async (data) => {
-    const body = JSON.stringify({english: data})
+const translate = async (data, token) => {
+    const body = JSON.stringify({english: data, "token": token})
     console.log(body, body.length)
     fetch(URL, {
         "method": 'POST',
@@ -87,7 +91,8 @@ const translateOnTranslationButton = async function () {
         const data = document.querySelector(translationInput).value;
         if (data) {
             // ws.send(data);
-            await translate(data)
+            const token = await getToken();
+            await translate(data, token)
         } else {
             alert("No data!");
         }
@@ -102,7 +107,8 @@ const translateOnEnter = async function () {
             const data = document.querySelector(translationInput).value;
             if (data) {
                 // ws.send(data);
-                await translate(data)
+                const token = await getToken();
+                await translate(data, token)
             } else {
                 alert("No data!");
             }
@@ -115,3 +121,4 @@ const translateOnEnter = async function () {
 
 translateOnTranslationButton();
 translateOnEnter();
+

@@ -25,15 +25,26 @@ def get_all_history(resposne: Response, db: Session = Depends(get_db)):
         422: {
             "model": app.schema.Message,
             "description": "Invalid english sentence"
-        }
+        },
+        401: {
+            "model": app.schema.Message,
+            "description": "Authenticated User"
+        },
     }
 )
 def create_history(
     response: Response,
-    english: schema.EnglishSchema | None = None,
+    english_token: schema.EnglishTokenSchema | None = None,
     # english: Annotated[str, Form()],
     db: Session = Depends(get_db), 
 ):
+    print(english_token)
+    if english_token.token == "" or english_token.token == None:
+        return JSONResponse(
+            status_code = status.HTTP_401_UNAUTHORIZED,
+            content = { "message": "Anauthorized request: user not authenticated" }
+        )
+    english = schema.EnglishSchema(english=english_token.english)
     print(english)
     if not english or english.english == "":
         return JSONResponse(

@@ -37,3 +37,10 @@ body {
     color: tomato;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+
+#message-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}

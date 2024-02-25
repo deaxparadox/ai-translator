@@ -9,7 +9,7 @@ import app.schema
 
 router = APIRouter()
 
-@router.get("/create")
+@router.post("/create")
 def create_user(
     response: Response, 
     db: Session = Depends(get_db),

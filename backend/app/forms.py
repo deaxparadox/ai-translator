@@ -56,14 +56,14 @@ class UserRegisterForm(forms.Form):
             return False
         return True
 
-    def save(self, *args, **kwargs) -> Any:
+    def save(self, *args, **kwargs) -> LTSAPIToken:
         token: str | None = None
         while True:
             token = str(uuid4())
             if self._check_duplicate(token):
                 break
         try:
-            user = User.objects.create(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
+            user = User.objects.create_user(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
         except User.MultipleObjectsReturned as e:
             print(e)
             return None
@@ -73,3 +73,18 @@ class UserRegisterForm(forms.Form):
 
         instance = LTSAPIToken.objects.create(user=user, token=token)
         return instance
+    
+class TranslateHiddenForm(forms.ModelForm):
+    token = forms.CharField(
+        label="",
+        widget=forms.widgets.Textarea(
+            attrs={
+                "readonly": "readonly", 
+                "hidden": "hidden", 
+                "id": "translate_hidden_token",
+            }
+        )
+    )
+    class Meta:
+        model = LTSAPIToken
+        fields = ("token",)

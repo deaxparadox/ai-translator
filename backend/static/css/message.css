@@ -1,0 +1,18 @@
+#message-container {
+    /* display: flex;
+    justify-content: right; */
+    margin: 20px;
+    border: none;
+}
+#message-container > #message > .messages {
+    list-style: none;
+}
+
+#message-container > #message > .messages > li {
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+    background-color: red;
+    box-shadow: 0px 0px 4px 1px rgb(215, 0, 0);
+    color: white;
+}
