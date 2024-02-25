@@ -5,9 +5,18 @@
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                <div class="message-close-button">
+                    <button onclick="closeMesssages(this)" type="button">&Cross;</button>
+                </div>
+                <p class="message-display-p">
+                    {{ message }}
+                </p>
+            </li>
             {% endfor %}
         </ul>
         {% endif %}
     </div>
 </div>
+
+<script src="{% static 'js/message.js' %}"></script>
