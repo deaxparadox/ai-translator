@@ -18,6 +18,7 @@
     align-items: center;
     padding: 50px;
     border-radius: 30px;
+    box-shadow: 0px 0px 4px 2px rgb(235, 235, 0);
 }
 
 #signin-container > #form > form {

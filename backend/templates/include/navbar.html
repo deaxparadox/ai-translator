@@ -8,12 +8,12 @@
         <li class="nav-item other">
             <a href="{% url "app:translate" %}">Translate</a>
         </li>
-        <li class="nav-item other">
+        {% comment %} <li class="nav-item other">
             <a href="{% url "app:team" %}"><img src='{% static "images/microsoft-teams.svg" %}' alt=""></a>
-        </li>
-        <li class="nav-item other">
+        </li> {% endcomment %}
+        {% comment %} <li class="nav-item other">
             <a href="{% url "app:aboutus" %}">About</a>
-        </li>
+        </li> {% endcomment %}
     </ul>
     <ul id="nav-right">
         {% if user.is_authenticated %}
