@@ -28,6 +28,7 @@ def translate_view(request):
     if not request.user.is_authenticated:
         return redirect(reverse("app:signin"))
     user = User.objects.get(id=request.user.id)
+    user = User.objects.get(id=1)
     token = LTSAPIToken.objects.get(user=user)
     form = TranslateHiddenForm(instance=token)
     return render(

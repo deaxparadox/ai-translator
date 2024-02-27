@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "site-features"
+		},
+		{
+			"path": "extension"
 		}
 	],
 	"settings": {
