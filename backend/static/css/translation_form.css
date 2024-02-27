@@ -41,8 +41,8 @@ textarea {
 }
 
 
-#translation-input-box,
-#translation-output-box,
+/* #translation-input-box,
+#translation-output-box, */
 #translation-direction-box {
     height: 100%;
     display: flex;
@@ -55,6 +55,7 @@ textarea {
 #translation-input-box,
 #translation-output-box {
     width: 45%;
+    padding: 20px;
 }
 
 
@@ -70,8 +71,8 @@ textarea {
 
 #translation-input,
 #translation-output {
-    width: 80%;
-    height: 80%;
+    width: 95%;
+    height: 95%;
     /* background-color: rgb(251, 246, 255); */
     margin: 10px;
     border: none;
@@ -80,7 +81,8 @@ textarea {
     background-color: white;
     border-radius: inherit;
     padding: 20px;
-    font-size: large;
+    padding: 40px;
+    font-size: medium;
     font-weight: bold;
 }
 
@@ -113,3 +115,22 @@ textarea {
     border: none;
     outline: none;
 } */
+
+
+#translation-english-copy-button,
+#translation-hindi-copy-button {
+    position: absolute;
+    margin: 20px;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+#translation-english-copy-button > img,
+#translation-hindi-copy-button > img {
+    height: 20px;
+    width: 20px;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}

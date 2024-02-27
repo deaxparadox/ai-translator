@@ -7,6 +7,9 @@
     <div id="translation-box">
         <div id="translation-input-box">
             <!-- <p id="translation-input"></p> -->
+            <button type="button" id="translation-english-copy-button">
+                <img src="{% static 'images/copy.png' %}" alt="" srcset="">
+            </button>
             <textarea placeholder="Enter something to translate..." name="translation-input" id="translation-input" cols="30" rows="10"></textarea>
         </div>
         <div id="translation-direction-box">
@@ -15,6 +18,9 @@
         </div>
         <div id="translation-output-box">
             <!-- <p id="translation-output"></p> -->
+            <button type="button" id="translation-hindi-copy-button">
+                <img src="{% static 'images/copy.png' %}" alt="" srcset="">
+            </button>
             <textarea placeholder="You will translated output here..." readonly name="translation-output" id="translation-output" cols="30" rows="10"></textarea>
         </div>
     </div>

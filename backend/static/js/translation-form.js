@@ -118,7 +118,18 @@ const translateOnEnter = async function () {
 }
 
 
+const copyToClipboard = async () => {
+    document.querySelector("#translation-english-copy-button").onclick = async () => {
+        document.querySelector("#translation-input").select();
+        document.execCommand("copy");
+    }
+
+    document.querySelector("#translation-hindi-copy-button").onclick = async () => {
+        document.querySelector("#translation-output").select();
+        document.execCommand("copy");
+    }
+}
 
 translateOnTranslationButton();
 translateOnEnter();
-
+copyToClipboard();
