@@ -26,7 +26,7 @@ const translate_content = async (text) => {
 
 const queue = [];
 const translate_nav = async () => {
-    const element = document.querySelector("body");
+    const element = document.querySelector("#nav");
     queue.push(element);
     while (queue.length > 0) {
         current = queue.shift();
@@ -66,3 +66,32 @@ const translate_nav = async () => {
 }
 
 translate_nav();
+
+
+const accessAllNodes = async () => {
+    const queue = []
+    let element = document.querySelector("body");
+    queue.push(element)
+    while (queue.length > 0) {
+        let current = queue.shift()
+        if (current.children.length > 0) {
+            if (
+                (current.TagName === "INPUT")
+            ) {
+                console.log(current.value)
+            } else if ((current.tagName === "SPAN") && (current.innerText === "*")) {
+                continue
+            }  else if ((current.tagName === "LINK") || (current.tagName === "SCRIPT")) {
+                continue
+            } else {
+                console.log(current.innerText)
+            }
+            
+        } else {
+            for (let children of current.children) {
+                console.log(children);
+                queue.push(children)
+            }
+        }
+    }
+}
