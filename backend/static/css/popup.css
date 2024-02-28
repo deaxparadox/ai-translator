@@ -1,0 +1,24 @@
+#popup-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 10px;
+    /* width: 100vw; */
+}
+#popup-container > #popup-box {
+    margin: 0;
+    padding: inherit0;
+    width: 100%;
+    padding: 20px;
+}
+#popup-translated-text  {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    margin: 2px;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: large;
+}

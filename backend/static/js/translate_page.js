@@ -6,7 +6,7 @@ const URL2 = 'http://localhost:9000/history/create'
 const translate2 = async (data, token) => {
     const body = JSON.stringify({english: data, "token": token})
     console.log(body, body.length)
-    return await fetch(URL, {
+    return await fetch(URL2, {
         "method": 'POST',
         "headers": {
             'Accept': '*/*',
@@ -64,6 +64,5 @@ const translate_nav = async () => {
         }
     }
 }
-document.ready = async () => {
-    translate_nav();
-}
+
+translate_nav();
